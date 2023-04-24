@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        console.log('====');
+        console.log('====');
+        let a = 1000000;
+        let worker = new Worker('./worker.js');//创建worker对象，传入另一个线程的路径
+        worker.postMessage({//worker.postMessage：向另一个线程文件传入数据
+            num: a
+        });
+        worker.onmessage = function (e) {//监听另一个线程是否完成，完成会返回一个massage对象
+            console.log(e.data);//massage对象中的数据保存在data属性中
+            
+        }
+        // worker.terminate();//停止worker
+        console.log('====');
+        console.log('====');
+
+    </script>
+</body>
+
+</html>
